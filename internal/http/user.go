@@ -29,7 +29,7 @@ func (h *Handler) PostTransaction(c *fiber.Ctx) error {
 
 	if err := request.Validate(); err != nil {
 		h.Logger.WithError(err).Error("transaction request validation failed")
-		return c.Status(http.StatusBadRequest).SendString("Invalid request")
+		return c.Status(http.StatusBadRequest).SendString(err.Error())
 	}
 
 	transaction, err := request.ToTransaction()
